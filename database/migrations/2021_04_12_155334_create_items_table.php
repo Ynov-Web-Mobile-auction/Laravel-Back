@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOffersTable extends Migration
+class CreateItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,15 @@ class CreateOffersTable extends Migration
      */
     public function up()
     {
-        Schema::create('offers', function (Blueprint $table) {
+        Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->text('details');
-            $table->integer('price');
-            $table->string('currency');
-//            $table->string('picture');
-//            $table->string('status');
-//            $table->foreignId('owner');
-//            $table->foreign('owner')->references('id')->on('users');
-//            $table->foreignId('owner');
-//            $table->foreign('owner')->references('id')->on('users');
+            $table->string('creator');
+            $table->float('price');
+            $table->string('picture');
+            $table->integer('status');
+            $table->foreignId('owner_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
