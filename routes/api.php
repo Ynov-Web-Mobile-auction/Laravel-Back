@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ItemController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,4 +29,13 @@ Route::group([
     Route::get('me', [AuthController::Class, 'me']);
     Route::put('me', [AuthController::Class, 'update']);
 
+});
+
+Route::group([
+
+    'middleware' => 'jwt.auth',
+
+], function ($router) {
+    Route::get('items', [ItemController::Class, 'index']);
+    Route::post('items', [ItemController::Class, 'store']);
 });
