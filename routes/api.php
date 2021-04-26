@@ -38,4 +38,6 @@ Route::group([
 ], function ($router) {
     Route::get('items', [ItemController::Class, 'index']);
     Route::post('items', [ItemController::Class, 'store']);
+    Route::get('items/{item}', [ItemController::Class, 'show']);
+    Route::get('items/user/{user}', [ItemController::Class, 'showByUser']);
 });

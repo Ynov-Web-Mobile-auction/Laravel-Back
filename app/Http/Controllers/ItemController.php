@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -19,8 +20,31 @@ class ItemController extends Controller
     {
         return Item::all();
     }
+
     /**
-     * Register a User.
+     * Display a specified Item
+     *
+     * @param  Item $item
+     * @return Response
+     */
+    public function show(Item $item)
+    {
+        return Item::all()->find($item);
+    }
+
+    /**
+     * Display all Item owned by the current user
+     *
+     * @param  User $user
+     * @return Response
+     */
+    public function showByUser($user)
+    {
+        return Item::all()->where('owner_id', $user);
+    }
+
+    /**
+     * Create a new Item associated to a User
      *
      * @param Request $request
      * @return JsonResponse
