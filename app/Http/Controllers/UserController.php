@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class ItemController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,36 +18,32 @@ class ItemController extends Controller
      */
     public function index()
     {
-        return Item::all();
+        return User::all();
     }
 
     /**
      * Display a specified Item
      *
-     * @param  Item $item
+     * @param  User $user
      * @return Response
      */
-    public function show(Item $item)
+    public function show($user)
     {
-        return Item::all()->find($item);
+        if ($user == 0)
+            $user = JWTAuth::parseToken()->authenticate();
+        return User::all()->find($user);
     }
 
     /**
-     * Create a new Item associated to a User
+     *  Update a User
      *
      * @param Request $request
      * @return JsonResponse
      */
-    public function store(Request $request) {
+    public function update(Request $request)
+    {
         $user = JWTAuth::parseToken()->authenticate();
-        $item = Item::create(array_merge(
-            $request->all(),
-            ['owner_id' => $user->id]
-        ));
-
-        return response()->json([
-            'message' => 'Item successfully created',
-            'user' => $item
-        ], 201);
+        $user->update($request->all());
+        return $user;
     }
 }

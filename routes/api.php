@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +28,6 @@ Route::group([
     Route::post('logout', [AuthController::Class, 'logout']);
     Route::post('refresh', [AuthController::Class, 'refresh']);
     Route::get('me', [AuthController::Class, 'me']);
-    Route::put('me', [AuthController::Class, 'update']);
 
 });
 
@@ -36,8 +36,11 @@ Route::group([
     'middleware' => 'jwt.auth',
 
 ], function ($router) {
+    Route::get('users', [UserController::Class, 'index']);
+    Route::get('users/{user}', [UserController::Class, 'show']);
+    Route::put('users', [UserController::Class, 'update']);
+
     Route::get('items', [ItemController::Class, 'index']);
     Route::post('items', [ItemController::Class, 'store']);
     Route::get('items/{item}', [ItemController::Class, 'show']);
-    Route::get('items/user/{user}', [ItemController::Class, 'showByUser']);
 });

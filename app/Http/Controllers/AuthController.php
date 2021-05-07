@@ -56,19 +56,6 @@ class AuthController extends Controller
     }
 
     /**
-     *  Update a User
-     *
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function update(Request $request)
-    {
-        $user = JWTAuth::parseToken()->authenticate();
-        $user->update($request->all());
-        return $user;
-    }
-
-    /**
      * Get the authenticated User.
      *
      * @return JsonResponse
