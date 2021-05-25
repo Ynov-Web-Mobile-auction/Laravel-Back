@@ -46,4 +46,21 @@ class UserController extends Controller
         $user->update($request->all());
         return $user;
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param $id integer
+     * @return Response
+     */
+    public function destroy(int $id)
+    {
+        $account = User::findOrFail($id);
+        $user = JWTAuth::parseToken()->authenticate();
+        if ($user == $account || $user->admin) {
+            $account->delete();
+        }
+
+        return 204;
+    }
 }

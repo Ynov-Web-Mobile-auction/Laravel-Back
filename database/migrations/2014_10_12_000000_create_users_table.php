@@ -19,6 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('avatar')->nullable();
             $table->integer('wallet')->default(0);
+            $table->boolean('admin')->default(false);
             $table->string('password');
             $table->timestamps();
         });
