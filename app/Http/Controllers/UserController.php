@@ -48,19 +48,15 @@ class UserController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Display a specified Item
      *
-     * @param $id integer
+     * @param Int $user
      * @return Response
      */
-    public function destroy(int $id)
+    public function getItemsByUser(Int $user)
     {
-        $account = User::findOrFail($id);
-        $user = JWTAuth::parseToken()->authenticate();
-        if ($user == $account || $user->admin) {
-            $account->delete();
-        }
+        $account = User::findOrFail($user);
 
-        return 204;
+        return $account->item;
     }
 }
