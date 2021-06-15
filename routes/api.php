@@ -42,8 +42,8 @@ Route::group([
 
     Route::get('users/{user}/items', [UserController::Class, 'getItemsByUser']);
 
-
     Route::get('items', [ItemController::Class, 'index']);
     Route::post('items', [ItemController::Class, 'store']);
     Route::get('items/{item}', [ItemController::Class, 'show']);
+    Route::put('items/{item}', [ItemController::Class, 'update']);
 });

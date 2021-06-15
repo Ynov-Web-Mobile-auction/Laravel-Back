@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -47,6 +46,31 @@ class ItemController extends Controller
 
         return response()->json([
             'message' => 'Item successfully created',
+            'user' => $item
+        ], 201);
+    }
+
+    /**
+     * Update Item associated to a User
+     *
+     * @param Item $item
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function update(Item $item, Request $request)
+    {
+        $user = JWTAuth::parseToken()->authenticate();
+        $item = Item::find($item->id);
+        if ($user->id === $item->owner->id) {
+            $item->update($request->all());
+        } else {
+            return response()->json([
+                'message' => 'On ne touche pas ce qui ne nous appartient pas !'
+            ], 401);
+        }
+
+        return response()->json([
+            'message' => 'Item successfully updated',
             'user' => $item
         ], 201);
     }
