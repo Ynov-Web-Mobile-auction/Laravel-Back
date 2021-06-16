@@ -13,7 +13,7 @@ class Item extends Model
         return $this->belongsTo(User::class, 'owner_id', 'id');
     }
 
-    public function auction(){
+    public function auctions(){
         return $this->belongsToMany(Auction::class, 'auctions')->withTimestamps();
     }
 

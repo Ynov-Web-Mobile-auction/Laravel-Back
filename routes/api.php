@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AuctionController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BidController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -46,4 +48,12 @@ Route::group([
     Route::post('items', [ItemController::Class, 'store']);
     Route::get('items/{item}', [ItemController::Class, 'show']);
     Route::put('items/{item}', [ItemController::Class, 'update']);
+
+    Route::get('auctions', [AuctionController::Class, 'index']);
+    Route::post('auctions/{item}', [AuctionController::Class, 'store']);
+    Route::get('auctions/{auction}', [AuctionController::Class, 'show']);
+
+    Route::get('bids', [BidController::Class, 'index']);
+    Route::post('bids/{auction}', [BidController::Class, 'store']);
+    Route::get('bids/{bid}', [BidController::Class, 'show']);
 });

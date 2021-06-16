@@ -37,12 +37,14 @@ class ItemController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $user = JWTAuth::parseToken()->authenticate();
         $item = Item::create(array_merge(
-            $request->all(),
-            ['owner_id' => $user->id]
-        ));
+            $request->all(), [
+                'owner_id' => $user->id,
+                'creator' => $user->name
+            ]));
 
         return response()->json([
             'message' => 'Item successfully created',

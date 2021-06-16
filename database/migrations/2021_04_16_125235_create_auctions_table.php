@@ -17,7 +17,7 @@ class CreateAuctionsTable extends Migration
             $table->id();
             $table->foreignId('item_id')->references('id')->on('items');
             $table->timestamp('duration');
-            $table->integer('status');
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }
