@@ -13,6 +13,9 @@ class Auction extends Model
         return $this->belongsToMany(User::class, 'users')->withTimestamps();
     }
 
+    public function item() {
+        return $this->belongsTo(Item::class, 'item_id', 'id');
+    }
     /**
      * The attributes that are mass assignable.
      *

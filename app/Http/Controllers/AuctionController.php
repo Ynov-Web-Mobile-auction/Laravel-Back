@@ -30,7 +30,7 @@ class AuctionController extends Controller
      */
     public function show(Auction $auction)
     {
-        return Auction::all()->find($auction);
+        return Auction::with('item')->get()->find($auction);
     }
 
     /**
