@@ -10,6 +10,10 @@ class Bid extends Model
 {
     use HasFactory, AsPivot;
 
+    public function auction() {
+        return $this->belongsTo(Auction::class, 'auction_id', 'id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

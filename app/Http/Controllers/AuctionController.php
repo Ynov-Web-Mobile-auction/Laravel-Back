@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Auction;
 use App\Models\Item;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -26,11 +29,11 @@ class AuctionController extends Controller
      * Display a specified Auction
      *
      * @param Auction $auction
-     * @return Response
+     * @return Collection|Builder[]|Model
      */
     public function show(Auction $auction)
     {
-        return Auction::with('item')->get()->find($auction);
+        return Auction::with('item', 'bids')->get()->find($auction);
     }
 
     /**

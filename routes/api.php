@@ -54,6 +54,7 @@ Route::group([
     Route::get('auctions/{auction}', [AuctionController::Class, 'show']);
 
     Route::get('bids', [BidController::Class, 'index']);
+    Route::get('bids/{item}', [BidController::Class, 'getAllBidsOnItem']);
     Route::post('bids/{auction}', [BidController::Class, 'store']);
     Route::get('bids/{bid}', [BidController::Class, 'show']);
 });

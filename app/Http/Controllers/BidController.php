@@ -35,6 +35,17 @@ class BidController extends Controller
     }
 
     /**
+     * Display a specified Bid
+     *
+     * @param Item $item
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public function getAllBidsOnItem(Item $item)
+    {
+        return Bid::with('auction')->get();
+    }
+
+    /**
      * Create a new Bid associated to a Item
      *
      * @param Auction $auction
