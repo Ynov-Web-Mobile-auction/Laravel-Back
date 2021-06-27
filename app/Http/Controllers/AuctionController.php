@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Auction;
 use App\Models\Item;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -52,6 +49,13 @@ class AuctionController extends Controller
      */
     public function store(Item $item, Request $request)
     {
+        $auction = Auction::where('item_id', $item->id)->with('bids')->first();
+        if ($auction) {
+            return response()->json([
+                'message' => 'Cette Item est deja au encheres',
+            ], 401);
+        }
+
         $user = JWTAuth::parseToken()->authenticate();
         if ($item->owner_id === $user->id) {
             $auction = Auction::create(array_merge($request->all(),
