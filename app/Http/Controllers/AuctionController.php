@@ -33,7 +33,7 @@ class AuctionController extends Controller
      */
     public function show(Auction $item)
     {
-        return Auction::where('item_id', $item->id)->with('bids')->get();
+        return Auction::where('item_id', $item->id)->with('bids')->first();
     }
 
     /**
