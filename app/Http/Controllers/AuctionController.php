@@ -29,11 +29,18 @@ class AuctionController extends Controller
      * Display a specified Auction
      *
      * @param Item $item
-     * @return Collection|Builder[]|Model
+     * @return JsonResponse
      */
-    public function show(Auction $item)
+    public function show(Item $item)
     {
-        return Auction::where('item_id', $item->id)->with('bids')->first();
+        $auction = Auction::where('item_id', $item->id)->with('bids')->first();
+        if ($auction) {
+            return $auction;
+        } else {
+            return response()->json([
+                'message' => 'Cette Item n\'est pas mis aux encheres',
+            ], 204);
+        }
     }
 
     /**
