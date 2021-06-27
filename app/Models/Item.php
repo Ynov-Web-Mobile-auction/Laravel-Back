@@ -14,7 +14,7 @@ class Item extends Model
     }
 
     public function auctions(){
-        return $this->belongsToMany(Auction::class, 'auctions')->withTimestamps();
+        return $this->belongsTo(Auction::class, 'id', 'item_id');
     }
 
     /**

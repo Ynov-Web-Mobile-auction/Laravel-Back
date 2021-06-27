@@ -28,12 +28,12 @@ class AuctionController extends Controller
     /**
      * Display a specified Auction
      *
-     * @param Auction $auction
+     * @param Item $item
      * @return Collection|Builder[]|Model
      */
-    public function show(Auction $auction)
+    public function show(Auction $item)
     {
-        return Auction::with('item', 'bids')->get()->find($auction);
+        return Auction::where('item_id', $item->id)->with('bids')->get();
     }
 
     /**
