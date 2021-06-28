@@ -43,8 +43,19 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $user = JWTAuth::parseToken()->authenticate();
-        $user->update($request->all());
-        return $user;
+        if ($request->has('password')) {
+            $user->update(array_merge(
+                $request->all(),
+                ['password' => bcrypt($request->password)]
+            ));
+        } else {
+            $user->update($request->all());
+        }
+
+        return response()->json([
+            'message' => 'User successfully registered',
+            'user' => $user
+        ], 201);
     }
 
     /**
