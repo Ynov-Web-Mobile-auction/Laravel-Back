@@ -56,7 +56,7 @@ class BidController extends Controller
     {
         $user = JWTAuth::parseToken()->authenticate();
         $bid = Bid::create(array_merge($request->all(), [
-            'item_id' => $auction->id,
+            'auction_id' => $auction->id,
             'user_id' => $user->id
         ]));
 
