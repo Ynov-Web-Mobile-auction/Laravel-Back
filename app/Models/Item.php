@@ -13,8 +13,8 @@ class Item extends Model
         return $this->belongsTo(User::class, 'owner_id', 'id');
     }
 
-    public function auctions(){
-        return $this->belongsTo(Auction::class, 'id', 'item_id');
+    public function auction(){
+        return $this->belongsTo(Auction::classx, 'item_id', 'id');
     }
 
     /**
